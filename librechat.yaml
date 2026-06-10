@@ -1,12 +1,30 @@
-version: 1.3.3
+version: 1.3.4
+
+# Definiamo i parametri rigidi per Fable 5 (evita il blocco d'errore iniziale)
+modelSpecs:
+  - name: "Claude Fable 5"
+    id: "claude-fable-5"
+    provider: "anthropic"
+    capabilities: ["artifacts"]
+    preset:
+      model: "claude-fable-5"
+      thinking:
+        type: "adaptive"      # Sblocca l'errore attivando la modalità nativa obbligatoria
+      effort: "medium"        # Richiesto dai modelli di quinta generazione
+      max_tokens: 4096
 
 endpoints:
   anthropic:
     # Abilita prompt caching
     promptCaching: true
-    # Modelli disponibili
+    # Modelli disponibili (Inclusa la flotta aggiornata Opus e Sonnet)
     availableModels:
+      - claude-fable-5
+      - claude-opus-4.8
+      - claude-opus-4.7
+      - claude-opus-4.6
       - claude-opus-4.5-20250514
+      - claude-sonnet-4.6
       - claude-sonnet-4.5-20250929
       - claude-sonnet-4-20250514
       - claude-haiku-4.5-20251001
@@ -19,7 +37,7 @@ endpoints:
       # TTL della cache in secondi (5 minuti default)
       ttl: 300
 
-# Configurazione file uploads (opzionale ma utile)
+# Configurazione file uploads
 fileConfig:
   endpoints:
     anthropic:
